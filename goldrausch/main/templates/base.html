@@ -1,0 +1,23 @@
+{% load i18n %}
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+
+        <title>{% block title %} yeah {% endblock %}</title>
+
+        <link rel='stylesheet' type='text/css' href='{{media_url}}/assets/css/reset.css' />
+		<link rel="favicon" href="{{media_url}}/assets/favicon.ico" />
+		<link rel="shortcut icon" href="{{media_url}}/assets/favicon.ico" />
+        
+    </head>
+    
+    <body>
+
+            <div id='wrapper'>
+                {% block content %}{% endblock %}
+        
+            </div>
+	</body>
+</html>

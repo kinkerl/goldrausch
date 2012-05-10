@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+
+{% block content %}
+	<img src="{{MEDIA_URL}}/logo.png"><br/>
+	{% get_current_language as LANGUAGE_CODE %}
+	the current language is: <strong>{{ LANGUAGE_CODE }}</strong><br/>
+	the media path is: <strong>{{MEDIA_URL}}</strong><br/>
+	the static path is: <strong>{{STATIC_URL}}</strong><br/>
+	<br/>
+	{% trans "This is a language test, again" %}
+	<br/>
+	run <code>./manage.py doc</code> to generate a documentation! you will find it here: <a href="/doc/index.html">/doc/index.html</a>
+	
+{%endblock%}

@@ -1,0 +1,8 @@
+#MySQL-python
+#PIL
+django
+django-debug-toolbar
+easy-thumbnails
+django-grappelli
+django-reversion
+django-extentions
