@@ -42,7 +42,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'django-elitist'
+project = u'goldrausch'
 copyright = u'2011, Dennis Schwertel'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -166,7 +166,7 @@ html_static_path = ['_static']
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'djangoelitistdoc'
+htmlhelp_basename = 'goldrauschdoc'
 
 
 # -- Options for LaTeX output --------------------------------------------------
