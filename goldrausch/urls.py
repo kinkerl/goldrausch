@@ -6,8 +6,9 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
 	(r'^$', 'main.views.index'),
-#	goldstrom.sv-preview.com/update/<boardid>/<eventid>/<statuscode>/<secret>
 	url(r'^update/(?P<boardid>\d+)/(?P<eventid>\d+)/(?P<statuscode>\d+)/(?P<secret>.*)', 'main.views.update'),
+	url(r'^overview', 'main.views.overview'),
+
 	(r'^admin/doc/', include('django.contrib.admindocs.urls')), # admin documentation
 	url(r'^admin/', include(admin.site.urls)),   #admn interface
 	(r'^grappelli/', include('grappelli.urls')), #new admin skin

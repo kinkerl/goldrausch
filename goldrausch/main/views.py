@@ -24,3 +24,11 @@ def update(request, boardid, eventid, statuscode, secret):
 	task.status = statuscode
 	task.save()
         return render_to_response('main/response.xml', ret)
+
+
+def overview(request):
+	agent_list = Agent.objects.all()
+	ret = RequestContext(request, {'agent_list':  agent_list})
+	return render(request, 'main/overview.xml', ret, content_type="application/xml")
+
+

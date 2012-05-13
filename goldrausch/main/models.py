@@ -23,7 +23,7 @@ class Task(models.Model):
 	"""
 	Ein Moeglicher Task der vom Client beobachtet wird
 	"""
-	aegnt = models.ForeignKey(Agent)
+	agent = models.ForeignKey(Agent, related_name="tasks")
 	name = models.CharField(max_length=50, help_text=_("Menschenlesbarer Name"))
 	code = models.IntegerField(help_text=_("Code der diesen Task beschreibt"))
 	status = models.IntegerField(default=0, help_text=_("Aktueller Status des Tasks"))

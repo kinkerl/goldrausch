@@ -2,7 +2,7 @@
 doc/_build/*
 
 *.py[co]
-
+*~
 # Packages
 *.egg
 *.egg-info

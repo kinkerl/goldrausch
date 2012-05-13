@@ -1,0 +1,5 @@
+<list>	{% for agent in agent_list %}
+	<agent code="{{agent.code}}" name="{{agent.name}}">{% for task in agent.tasks.all %}
+		<task name="{{task.name}}" code="{{task.code}}">{{task.status}}</task>{% endfor %}
+	</agent>{% endfor %}
+</list>
