@@ -5,4 +5,4 @@ django-debug-toolbar
 easy-thumbnails
 django-grappelli
 django-reversion
-django-extentions
+django-extensions
