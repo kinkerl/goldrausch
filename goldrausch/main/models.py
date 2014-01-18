@@ -31,3 +31,13 @@ class Task(models.Model):
 	def __unicode__(self):
 		return "%d//%s" %(self.code,self.name)
 
+	class Meta:
+		ordering = ["code"]
+
+	def save(self, *args, **kwargs):
+		super(Task, self).save(*args, **kwargs) # Call the "real" save() method.
+		print "SAVE"
+		f = open('/home/pi/rgb','w')
+		for task in self.agent.tasks.all():
+			f.write(str(task.status)+'\n') # python will convert \n to os.linesep
+		print "SAAAAVE"
