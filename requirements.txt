@@ -1,8 +1,7 @@
 #MySQL-python
 #PIL
-django
-django-debug-toolbar
+django==1.3.7
 easy-thumbnails
-django-grappelli
-django-reversion
+django-grappelli==2.3.9
+django-reversion==1.5.2
 django-extensions

@@ -1,12 +1,81 @@
-{% extends "base.html" %}
 {% load i18n %}
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+
+        <title>AmbiTV - Color Settings</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black"> <!--  status bar style: black or black-translucent -->
+        <meta name="apple-touch-fullscreen" content="yes"> <!-- run webapp in fullscreen if it was added to homescreen -->
+        <meta name="apple-mobile-web-app-capable" content="yes"> <!-- run webapp in fullscreen if it was added to homescreen -->
+
+        <link href="{{ STATIC_URL }}assets/stylesheets/css/jquery.mobile.min.css" rel="stylesheet" type="text/css" media="all">
+        <link href="{{ STATIC_URL }}assets/stylesheets/css/jquery.colorpickersliders.css" rel="stylesheet" type="text/css" media="all">
+        <link href="{{ STATIC_URL }}assets/stylesheets/css/main.css" rel="stylesheet" type="text/css" media="all">
+
+        <!-- ios specific images-->
+        <link rel="apple-touch-startup-image" href="{{ STATIC_URL }}assets/images/apple-touch-startup-image.png">
+        <link rel="apple-touch-icon" sizes="57x57" href="{{ STATIC_URL }}assets/images/apple-touch-icon-114x114-precomposed.png"> <!-- Standard iPhone -->
+        <link rel="apple-touch-icon" sizes="114x114" href="{{ STATIC_URL }}assets/images/apple-touch-icon-114x114-precomposed.png"> <!-- Retina iPhone -->
+        <link rel="apple-touch-icon" sizes="72x72" href="{{ STATIC_URL }}assets/images/apple-touch-icon-144x144-precomposed.png"> <!-- Standard iPad -->
+        <link rel="apple-touch-icon" sizes="144x144" href="{{ STATIC_URL }}assets/images/apple-touch-icon-144x144-precomposed.png"> <!-- Retina iPad -->
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ STATIC_URL }}assets/images/apple-touch-icon-144x144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ STATIC_URL }}assets/images/apple-touch-icon-114x114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="{{ STATIC_URL }}assets/images/apple-touch-icon-144x144-precomposed.png">
+
+        <!--[if IE]>
+            <link rel="SHORTCUT ICON" href="{{ STATIC_URL }}assets/images/favicon.ico">
+        <![endif]-->
+
+        <link href="{{ STATIC_URL }}assets/images/favicon.png" rel="icon" type="image/png">
+    </head>
+
+    <body>
+
+        <div id="container">
+            <div id="content" data-role="page">
+                <div id="color-picker"></div>
+
+                <div id="footer">
+                    <div class="button-holder">
+                        <a href="#/" class="button harmony-button">
+                            <span>Harmony</span>
+                        </a>
+                    </div>
+                	<form id="submit-form" method="POST" action="/" data-role="none">
+    	            	<input type="hidden" name="rgb" class="output-field" data-color-format="rgb" data-role="none">
+    	            	<input type="submit" name="submit-button" value="Save" class="button" data-role="none">
+    	            </form>
+                </div>
+            </div>
+
+            <div data-role="dialog" id="dialog-success">
+                <div data-role="header">
+                    <h2>Success</h2>
+                </div>
+                <div role="main" class="ui-content"></div>
+            </div>
+
+            <div data-role="dialog" id="dialog-error">
+                <div data-role="header">
+                    <h2>Error</h2>
+                </div>
+                <div role="main" class="ui-content"></div>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="{{ STATIC_URL }}assets/javascripts/vendor/jquery-2.0.3.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}assets/javascripts/vendor/jquery.mobile-1.4.1pre.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}assets/javascripts/vendor/tinycolor.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}assets/javascripts/vendor/plugins/jquery.colorpickersliders.js"></script>
+
+        <script type="text/javascript" src="{{ STATIC_URL }}assets/javascripts/application/main.js"></script>
+
+    </body>
+</html>
 
 
-{% block content %}
-	<img src="{{MEDIA_URL}}/logo.png"><br/>
-	this is goldrausch. 
-	<ul>
-	<li>project: <a href="https://github.com/kinkerl/goldrausch">here</a></li>
-	<li>project-doc: <a href="/doc/index.html">here</a></li>
-	</ul>
-{%endblock%}

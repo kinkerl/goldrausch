@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django.conf import settings
-
+import os
 
 class Agent(models.Model):
 	"""
@@ -36,8 +36,7 @@ class Task(models.Model):
 
 	def save(self, *args, **kwargs):
 		super(Task, self).save(*args, **kwargs) # Call the "real" save() method.
-		print "SAVE"
-		f = open('/home/pi/rgb','w')
+		f = open(os.path.join(settings.PROJECT_DIR ,'rgb'),'w')
 		for task in self.agent.tasks.all():
 			f.write(str(task.status)+'\n') # python will convert \n to os.linesep
-		print "SAAAAVE"
+

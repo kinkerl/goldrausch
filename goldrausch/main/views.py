@@ -19,11 +19,11 @@ def update(request, boardid, eventid, statuscode, secret):
 
 	agent = get_object_or_404(Agent, code=boardid)
 	if not agent.secret == secret:
-	        return render_to_response('main/error.xml', ret)		
+		return render_to_response('main/error.xml', ret)		
 	task = get_object_or_404(Task, code=eventid)
 	task.status = statuscode
 	task.save()
-        return render_to_response('main/response.xml', ret)
+	return render_to_response('main/response.xml', ret)
 
 
 def overview(request):

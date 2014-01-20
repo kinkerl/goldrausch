@@ -1,3 +1,5 @@
+import os
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -7,10 +9,13 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+PROJECT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '../'))
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '/home/pi/goldrausch/goldrausch/boilerplate.sqlite3',                      # Or path to database file if using sqlite3.
+        'NAME': os.path.join(PROJECT_DIR,'goldrausch/boilerplate.sqlite3'),                      # Or path to database file if using sqlite3.
         'USER': '',                             # Not used with sqlite3.
         'PASSWORD': '',                         # Not used with sqlite3.
         'HOST': '',                             # Set to empty string for localhost. Not used with sqlite3.
