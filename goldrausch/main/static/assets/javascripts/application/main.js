@@ -58,6 +58,7 @@ $( document ).ready(function() {
         // get rgb color values
         var rgbValues = $('.output-field').val().match(/\d+/g);
         var count = 0;
+        var countFail = 0;
 
         // loop rgb values
         for(var i=0; i<rgbValues.length; i++) {
@@ -66,11 +67,13 @@ $( document ).ready(function() {
             requestUrl = requestParams['ip'] + '/update/' + requestParams['agentId'] + '/' + (i+1) + '/' + rgbValues[i] + '/' + requestParams['secret'];
 
             // send
-            if( sendRgbValue( requestUrl ) ) {
-                if( count < rgbValues.length) {
+            $.when(
+                sendRgbValue( requestUrl )
+            ).done(function( url ) {
+                if( count < rgbValues.length - 1) {
                     count++;
                 } else {
-                    $('#dialog-success').find('.ui-content').html( 'Changes were saved. (' + $('.output-field').val() + ')<br><br>' + requestUrl );
+                    $('#dialog-success').find('.ui-content').html( 'Changes were saved. (' + url + ')' );
                     $.mobile.changePage("#dialog-success", {
                         transition: "pop",
                         role: "dialog",
@@ -78,21 +81,58 @@ $( document ).ready(function() {
                         modal: true
                     });
                 }
-            } else {
-                $('#dialog-error').find('.ui-content').html( 'Can\'t save changes. (' + $('.output-field').val() + ')<br><br>' + requestUrl );
-                $.mobile.changePage("#dialog-error", {
-                    transition: "pop",
-                    role: "dialog",
-                    resizable: false,
-                    modal: true
-                });
-                return;
-            }
+            }).fail(function( url ) {
+
+                if( countFail === 0 ) {
+                    $('#dialog-error').find('.ui-content').html( 'Can\'t save changes. (' + url + ')' );
+                    $.mobile.changePage("#dialog-error", {
+                        transition: "pop",
+                        role: "dialog",
+                        resizable: false,
+                        modal: true
+                    });
+                }
+
+                countFail++;
+
+                return false;
+            });
+
+            // if( sendRgbValue( requestUrl ) ) {
+            //     console.log('test');
+            //     if( count < rgbValues.length) {
+            //         count++;
+            //     } else {
+            //         $('#dialog-success').find('.ui-content').html( 'Changes were saved. (' + $('.output-field').val() + ')<br><br>' + requestUrl );
+            //         $.mobile.changePage("#dialog-success", {
+            //             transition: "pop",
+            //             role: "dialog",
+            //             resizable: false,
+            //             modal: true
+            //         });
+            //     }
+            // } else {
+            //     $('#dialog-error').find('.ui-content').html( 'Can\'t save changes. (' + $('.output-field').val() + ')<br><br>' + requestUrl );
+            //     $.mobile.changePage("#dialog-error", {
+            //         transition: "pop",
+            //         role: "dialog",
+            //         resizable: false,
+            //         modal: true
+            //     });
+            //     return;
+            // }
         }
 
         return false;
 
     });
+
+    function send() {
+
+
+
+    }
+
 
     // set harmony color
     $('#footer .harmony-button').on('click touchstart', function(e) {
@@ -120,21 +160,27 @@ $( document ).ready(function() {
     // ajax call
     function sendRgbValue( url ) {
 
-        $.ajax({
-            type: "GET",
-            url: url,
-            //cache: false,
-            //async: false,
-            //dataType: 'GET',
-            success: function(responseData) {
-                console.log('success');
-                return true;
-            },
-            error: function() {
-                console.log('error');
-                return false;
-            }
-        });
+        return $.Deferred( function ( dfd ) {
+
+            $.ajax({
+                type: "GET",
+                url: url,
+                //cache: false,
+                //async: false,
+                success: function(responseData) {
+                    //console.log('success', url);
+                    dfd.resolve( url );
+                },
+                error: function() {
+                    //console.log('error', url);
+                    dfd.reject( url );
+                }
+            });
+
+        }).promise();
+
+
+
 
     }
 
