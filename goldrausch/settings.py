@@ -61,7 +61,7 @@ USE_L10N = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = os.path.join(PROJECT_DIR,'media')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -72,7 +72,7 @@ MEDIA_URL = '/media/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = os.path.join(PROJECT_DIR,'static')
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -120,9 +120,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'urls'
 
 TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
+    os.path.join(PROJECT_DIR,'main/templates')
 )
 
 INSTALLED_APPS = (
@@ -135,8 +133,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.admindocs',
-    #'django_extensions',	
- #   'south',
     'reversion',
     'main',
 )
@@ -174,28 +170,4 @@ TEMPLATE_CONTEXT_PROCESSORS  = (
 )
 
 
-GRAPPELLI_ADMIN_TITLE = 'elitist-boilerplate'
-
-#apps in this list will get model images created using graph_models and place them in ../doc/images/<modelname>.png
-ELITIST_GRAPH_MODELS_LIST = ['main']
-
-
-ELITIST_RELEASE_TARGET= {
-	"staging": ('releasehostname', '/examplepath/on/server')
-}
-
-# all settings for the production server, 
-# and settings common to all development machines eg. 
-# INSTALLED_APPS, TEMPLATE_DIRS, MIDDLEWARE_CLASSES etc.
-
-# Import local_settings at the very bottom of the file
-# Use try|except block since we won't have this on the production server, 
-# only on dev machines
-try:
-	from local_settings import *
-except ImportError:
-	if DEBUG:
-		print "DEBUG is on but did not find local_settings.py. This is not right!"
-		import sys
-		sys.exit(-1)
-	pass
+GRAPPELLI_ADMIN_TITLE = 'ambitv'
